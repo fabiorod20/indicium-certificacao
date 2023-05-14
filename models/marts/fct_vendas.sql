@@ -40,7 +40,7 @@ with
             pedido_item.salesorderid_ordens
             , pedido_item.rowguid
             , cartoes.sk_cartao as fk_cartao
-            , cidade.sk_cidade as fk_cidade
+            , cidades.sk_cidade as fk_cidade
             , clientes.sk_cliente as fk_cliente
             , localizacoes.sk_localizacao as fk_localizacao
             , lojas.sk_loja as fk_loja
