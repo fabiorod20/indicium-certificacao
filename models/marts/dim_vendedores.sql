@@ -9,38 +9,28 @@ with
     )
     , vendedores as (
         select *
-        from {{ ref('stg_erp__fornecedores') }}
+        from {{ ref('stg_sap__vendedores') }}
     )
     , join_tabelas as (
         select
-            produtos.id_produto
-            , produtos.id_fornecedor
-            , produtos.id_categoria
-            , produtos.nome_produto
-            , produtos.quantidade_por_unidade
-            , produtos.preco_por_unidade
-            , produtos.unidades_em_estoque
-            , produtos.unidades_por_ordem
-            , produtos.nivel_reabastecimento
-            , produtos.is_discontinuado
-            , categorias.nome_categoria
-            , categorias.descricao_categoria
-            , fornecedores.nome_fornecedor
-            , fornecedores.contato_fornecedor
-            , fornecedores.endereco_fornecedor
-            , fornecedores.cep_fornecedor
-            , fornecedores.cidade_fornecedor
-            , fornecedores.regiao_fornecedor
-            , fornecedores.pais_fornecedor
-        from produtos
-        left join categorias on
-            produtos.id_categoria = categorias.id_categoria
-        left join fornecedores on
-            produtos.id_fornecedor = fornecedores.id_fornecedor
+           pessoas.rowguid_pessoa
+            , pessoas.businessentityid_pessoa
+            , funcionarios.rowguid_funcionarios
+            , funcionarios.businessentityid_funcionarios
+            , vendedores.rowguid_vendedor
+            , vendedores.businessentityid_vendedor
+            , pessoas.nome_pessoa as vendedor
+
+        from pessoas
+        right join funcionarios on
+            pessoas.rowguid_pessoa = funcionarios.rowguid_funcionarios
+
+        right join vendedores on
+            pessoas.rowguid_pessoa = vendedores.rowguid_vendedor
     )
     , transformacoes as (
         select
-            row_number() over (order by id_produto) as sk_produtos
+            row_number() over (order by rowguid_vendedor) as sk_vendedores
             , *
         from join_tabelas
     )
