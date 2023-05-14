@@ -4,7 +4,7 @@ version: 2
 sources:
   - name: sap
     description: Fonte do sap da Adventure Works
-    schema: sap_awd
+    schema: sap_adw
     tables:
       
       - name: person
