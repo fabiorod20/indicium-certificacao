@@ -30,7 +30,7 @@ with
     )
     , transformacoes as (
         select
-            row_number() over (order by rowguid_vendedor) as sk_vendedores
+            row_number() over (order by rowguid_vendedor) as sk_vendedor
             , *
         from join_tabelas
     )

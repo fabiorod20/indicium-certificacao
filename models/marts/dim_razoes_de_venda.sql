@@ -20,7 +20,7 @@ with
     )
     , transformacoes as (
         select
-            row_number() over (order by salesorderid_chaverazaodevenda) as sk_razoes
+            row_number() over (order by salesorderid_chaverazaodevenda) as sk_razao
             , *
         from join_tabelas
     )

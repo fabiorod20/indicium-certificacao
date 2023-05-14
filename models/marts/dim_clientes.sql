@@ -21,7 +21,7 @@ with
     )
     , transformacoes as (
         select
-            row_number() over (order by id_cliente) as sk_clientes
+            row_number() over (order by id_cliente) as sk_cliente
             , *
         from join_tabelas
     )

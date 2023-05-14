@@ -22,7 +22,7 @@ with
     )
     , transformacoes as (
         select
-            row_number() over (order by countryregioncode_pais) as sk_localizacoes
+            row_number() over (order by countryregioncode_pais) as sk_localizacao
             , *
         from join_tabelas
     )

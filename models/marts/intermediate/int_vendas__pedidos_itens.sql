@@ -9,21 +9,16 @@ with
     )
     , joined_pedidos_itens as (
         select
-            pedidos.salesorderid_ordens
-            , pedidos.rowguid_ordens
-            , pedidos.customerid_ordens
-            , pedidos.salespersonid_ordens
-            , pedidos.creditcardid_ordens
-            , pedido_itens.salesorderid_detalhesordens
-            , pedido_itens.rowguid_detalhesordens
-            , pedido_itens.salesorderdetailid_detalhesordens
-            , pedido_itens.productid_detalhesordens
+            pedidos.salesorderid_ordens as salesorderid_ordens
+            , pedidos.rowguid_ordens as rowguid
+            , pedidos.customerid_ordens as customerid
+            , pedidos.salespersonid_ordens as salespersonid
+            , pedidos.creditcardid_ordens as creditcardid
+            , pedido_itens.salesorderid_detalhesordens as salesorderid_detalhesordens
+            , pedido_itens.productid_detalhesordens as productid
             , pedidos.orderdate_ordens as data_do_pedido
-            , pedidos.duedate_ordens
             , pedidos.status_ordens as status
             , pedidos.purchaseordernumber_ordens as numero_do_pedido
-            , pedidos.accountnumber_ordens
-            , pedidos.creditcardapprovalcode_ordens
             , pedidos.subtotal_ordens as subtotal
             , pedidos.taxamt_ordens as taxas
             , pedidos.freight_ordens as frete
