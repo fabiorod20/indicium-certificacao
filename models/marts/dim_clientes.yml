@@ -1,0 +1,12 @@
+
+version: 2
+
+models:
+  - name: dim_clientes
+    description: Essa é a dimensão com dados de clientes.
+    columns:
+      - name: sk_clientes
+        description: Essa é a chave surrogate key da clientes.
+        tests:
+          - unique
+          - not_null
