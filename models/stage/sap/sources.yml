@@ -1,0 +1,17 @@
+
+version: 2
+
+sources:
+  - name: sap
+    description: Fonte do sap da Adventure Works
+    schema: sap_awd
+    tables:
+      
+      - name: person
+        description: Tabela com informações de clientes.
+        columns:
+          - name: businessentityid
+            description: Chave primária da tabela person.
+            tests:
+              - unique
+              - not_null
