@@ -1,0 +1,12 @@
+
+version: 2
+
+models:
+  - name: dim_cidades
+    description: Essa é a dimensão com dados de cidades.
+    columns:
+      - name: sk_cidade
+        description: Essa é a chave surrogate key da dimesao cidades.
+        tests:
+          - unique
+          - not_null

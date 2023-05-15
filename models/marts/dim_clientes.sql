@@ -16,12 +16,13 @@ with
             , pessoas.nome_pessoa as cliente
 
         from pessoas
-        left join clientes on
+        Left join clientes on
             pessoas.rowguid_pessoa = clientes.rowguid_cliente
+        
     )
     , transformacoes as (
         select
-            row_number() over (order by id_cliente) as sk_cliente
+            row_number() over (order by rowguid_pessoa) as sk_cliente
             , *
         from join_tabelas
     )

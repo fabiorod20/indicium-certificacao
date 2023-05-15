@@ -1,0 +1,12 @@
+
+version: 2
+
+models:
+  - name: dim_localizacoes
+    description: Essa é a dimensão com dados de localizações.
+    columns:
+      - name: sk_localizacao
+        description: Essa é a chave surrogate key da dimesao localizações.
+        tests:
+          - unique
+          - not_null

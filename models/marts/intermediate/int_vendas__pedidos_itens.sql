@@ -16,6 +16,7 @@ with
             , pedidos.creditcardid_ordens as creditcardid
             , pedido_itens.salesorderid_detalhesordens as salesorderid_detalhesordens
             , pedido_itens.productid_detalhesordens as productid
+            , pedido_itens.rowguid_detalhesordens as rowguid_detalhesordens
             , pedidos.orderdate_ordens as data_do_pedido
             , pedidos.status_ordens as status
             , pedidos.purchaseordernumber_ordens as numero_do_pedido
