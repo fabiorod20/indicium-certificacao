@@ -7,11 +7,53 @@ sources:
     schema: sap_adw
     tables:
       
-      - name: person
+      - name: customer
         description: Tabela com informações de clientes.
         columns:
-          - name: businessentityid
-            description: Chave primária da tabela person.
+          - name: rowguid
+            description: Chave primária da tabela customer.
             tests:
               - unique
               - not_null
+      
+      - name: person
+        description: Tabela com todas as informações de pessoas da adw
+
+      - name: creditcard
+        description: Tabela com todas as informações de cartão de crédito
+
+      - name: employee
+        description: Tabela com todas as informações de funcionários
+
+      - name: store
+        description: Tabela com todas as informações das lojas da adw
+
+      - name: salesorderheadersalesreason
+        description: Tabela com a chave para juntar a tabela razão de venda com a tabela de ordem de venda
+
+      - name: salesreason
+        description: Tabela com todas as informações de razão de venda
+
+      - name: product
+        description: Tabela com todas as informações de produtos
+
+      - name: stateprovince
+        description: Tabela com todas as informações de estado
+
+      - name: countryregion
+        description: Tabela com todas as informações de países
+
+      - name: address
+        description: Tabela com todas as informações de cidade
+
+      - name: salesorderdetail
+        description: Tabela com todos os detalhes de cada pedido
+
+      - name: salesorderheader
+        description: Tabela com todos os pedidos
+
+      - name: salesperson
+        description: Tabela com qual vendedor/vendedora realizou a venda
+
+      
+    
