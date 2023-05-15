@@ -1,4 +1,6 @@
+
 version: 2
+
 models:
   - name: fct_vendas
     description: Essa é a dimensão com dados de vendas.

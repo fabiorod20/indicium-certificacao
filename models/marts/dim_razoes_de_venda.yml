@@ -1,0 +1,12 @@
+
+version: 2
+
+models:
+  - name: dim_razoes_de_venda
+    description: Essa é a dimensão com dados de razao de venda.
+    columns:
+      - name: sk_razao
+        description: Essa é a chave surrogate key da dimesao razao de venda.
+        tests:
+          - unique
+          - not_null

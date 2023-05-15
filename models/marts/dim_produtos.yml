@@ -1,0 +1,12 @@
+
+version: 2
+
+models:
+  - name: dim_produtos
+    description: Essa é a dimensão com dados de produtos.
+    columns:
+      - name: sk_produto
+        description: Essa é a chave surrogate key da dimesao produtos.
+        tests:
+          - unique
+          - not_null

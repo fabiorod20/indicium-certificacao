@@ -1,0 +1,12 @@
+
+version: 2
+
+models:
+  - name: dim_cartoes_de_credito
+    description: Essa é a dimensão com dados de cartao de credito.
+    columns:
+      - name: sk_cartao
+        description: Essa é a chave surrogate key da dimesao cartao.
+        tests:
+          - unique
+          - not_null
