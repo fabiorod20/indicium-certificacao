@@ -16,7 +16,7 @@ with
             , pessoas.nome_pessoa as cliente
 
         from pessoas
-        right join clientes on
+        left join clientes on
             pessoas.rowguid_pessoa = clientes.rowguid_cliente
     )
     , transformacoes as (

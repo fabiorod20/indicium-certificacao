@@ -73,7 +73,7 @@ with
         from pedido_item
         left join cartoes on pedido_item.creditcardid = cartoes.creditcardid_cartaodecredito
         left join cidades on pedido_item.rowguid = cidades.rowguid_cidade
-        left join clientes on pedido_item.rowguid = clientes.rowguid_cliente
+        left join clientes on pedido_item.customerid = clientes.id_cliente
         left join localizacoes on pedido_item.rowguid = localizacoes.rowguid_estado
         left join lojas on pedido_item.rowguid = lojas.rowguid_loja
         left join produtos on pedido_item.rowguid = produtos.rowguid_produto

@@ -22,10 +22,10 @@ with
             , pessoas.nome_pessoa as vendedor
 
         from pessoas
-        right join funcionarios on
+        left join funcionarios on
             pessoas.rowguid_pessoa = funcionarios.rowguid_funcionarios
 
-        right join vendedores on
+        left join vendedores on
             pessoas.rowguid_pessoa = vendedores.rowguid_vendedor
     )
     , transformacoes as (
