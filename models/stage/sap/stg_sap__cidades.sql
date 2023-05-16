@@ -8,6 +8,7 @@ with
         select
             cast(rowguid as string) as rowguid_cidade
             , cast(stateprovinceid as int) as stateprovinceid_cidade
+            , cast(addressid as int) as addressid_cidade
             , cast(city as string) as cidade_cidade
         from fonte_cidade
     )

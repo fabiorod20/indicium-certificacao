@@ -5,7 +5,7 @@ models:
   - name: dim_clientes
     description: Essa é a dimensão com dados de clientes.
     columns:
-      - name: sk_clientes
+      - name: sk_cliente
         description: Essa é a chave surrogate key da clientes.
         tests:
           - unique

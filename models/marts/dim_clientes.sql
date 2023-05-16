@@ -15,9 +15,9 @@ with
             , clientes.rowguid_cliente
             , pessoas.nome_pessoa as cliente
 
-        from pessoas
-        Left join clientes on
-            pessoas.rowguid_pessoa = clientes.rowguid_cliente
+        from clientes
+        left join pessoas on
+            clientes.id_cliente = pessoas.businessentityid_pessoa
         
     )
     , transformacoes as (
