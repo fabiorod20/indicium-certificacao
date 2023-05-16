@@ -6,6 +6,7 @@ with
             , cast(customerid as int) as customerid_ordens
             , cast(salespersonid as int) as salespersonid_ordens
             , cast(creditcardid as int) as creditcardid_ordens
+            , cast(territoryid as int) as territoryid_ordens
             , cast(orderdate as string) as orderdate_ordens
             , cast(duedate as string) as duedate_ordens
             , cast(status as int) as status_ordens

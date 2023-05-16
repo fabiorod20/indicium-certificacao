@@ -20,7 +20,7 @@ with
     )
     , transformacoes as (
         select
-            row_number() over (order by salesreasonid_razaodevenda) as sk_razao
+            {{ dbt_utils.generate_surrogate_key(['salesorderid_chaverazaodevenda', 'salesreasonid_razaodevenda']) }} as sk_razao
             , *
         from join_tabelas
     )

@@ -10,10 +10,11 @@ with
     , joined_pedidos_itens as (
         select
             pedidos.salesorderid_ordens as salesorderid_ordens
-            , pedidos.rowguid_ordens as rowguid
+            , pedidos.rowguid_ordens as rowguid_ordens
             , pedidos.customerid_ordens as customerid
             , pedidos.salespersonid_ordens as salespersonid
             , pedidos.creditcardid_ordens as creditcardid
+            , pedidos.territoryid_ordens as territoryid
             , pedido_itens.salesorderid_detalhesordens as salesorderid_detalhesordens
             , pedido_itens.productid_detalhesordens as productid
             , pedido_itens.rowguid_detalhesordens as rowguid_detalhesordens
