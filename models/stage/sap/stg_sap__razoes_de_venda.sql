@@ -7,7 +7,7 @@ with
  , renomear_razaodevenda as (
         select
             cast(salesreasonid as int) as salesreasonid_razaodevenda
-            , cast(name as string) as razaodevenda_razaodevenda
+            , cast(name as string) as name_razaodevenda
         from fonte_razaodevenda
     )
 select *

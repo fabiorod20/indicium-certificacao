@@ -13,38 +13,38 @@ with
     )
     , join_tabelas as (
         select
-           row_number() over (order by stateprovinceid_cidade) as sk_localizacao
-            , cidades.rowguid_cidade
-            , cidades.addressid_cidade
-            , estados.stateprovinceid_estado
+           estados.stateprovinceid_estado
+            , estados.territoryid_estado
             , estados.countryregioncode_estado
-            , estados.territoryid_estado as territoryid
-            , cidades.stateprovinceid_cidade
-            , cidades.cidade_cidade as cidade
+            , paises.countryregioncode_pais
             , estados.estado_estado as estado
-        
+            , paises.pais_pais as pais
+
+        from paises
+        right join estados on
+            paises.countryregioncode_pais = estados.countryregioncode_estado
+    )
+    , join_tabelao as (
+        select
+           join_tabelas.stateprovinceid_estado
+            , join_tabelas.territoryid_estado
+            , join_tabelas.countryregioncode_estado
+            , cidades.stateprovinceid_cidade
+            , join_tabelas.countryregioncode_pais
+            , cidades.addressid_cidade
+            , join_tabelas.estado
+            , join_tabelas.pais
+            , cidades.cidade_cidade as cidade
+
         from cidades
-        left join estados on
-            cidades.stateprovinceid_cidade = estados.stateprovinceid_estado
+        left join join_tabelas on
+            cidades.stateprovinceid_cidade = join_tabelas.stateprovinceid_estado
     )
     , transformacoes as (
         select
-            row_number() over (order by stateprovinceid_cidade) as sk_localizacao
-            , join_tabelas.rowguid_cidade
-            , join_tabelas.addressid_cidade
-            , join_tabelas.stateprovinceid_estado
-            , join_tabelas.countryregioncode_estado
-            , paises.countryregioncode_pais
-            , join_tabelas.territoryid
-            , join_tabelas.stateprovinceid_cidade
-            , join_tabelas.cidade
-            , join_tabelas.estado
-            , paises.pais_pais as pais
-       
-        from join_tabelas
-        left join paises on
-            join_tabelas.countryregioncode_estado = paises.countryregioncode_pais
+           row_number() over (order by stateprovinceid_cidade) as sk_localizacao
+            , *
+        from join_tabelao
     )
-
 select *
 from transformacoes

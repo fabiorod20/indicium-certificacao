@@ -12,7 +12,7 @@ with
           chaverazoes.salesorderid_chaverazaodevenda
             , chaverazoes.salesreasonid_chaverazaodevenda
             , razoes.salesreasonid_razaodevenda
-            , razoes.razaodevenda_razaodevenda as razao_de_venda
+            , razoes.name_razaodevenda as razao_de_venda
 
         from chaverazoes
         left join razoes on
@@ -20,7 +20,7 @@ with
     )
     , transformacoes as (
         select
-            {{ dbt_utils.generate_surrogate_key(['salesorderid_chaverazaodevenda', 'salesreasonid_razaodevenda']) }} as sk_razao
+            row_number() over (order by salesorderid_chaverazaodevenda) as sk_razao
             , *
         from join_tabelas
     )

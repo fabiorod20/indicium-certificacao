@@ -6,7 +6,7 @@ models:
     description: Essa é a dimensão com dados de vendedores.
     columns:
       - name: sk_venda
-        description: Essa é a chave surrogate key da fatos vendas.
+        description: Essa é a chave foreign key da fatos vendas.
         tests:
           - unique
           - not_null

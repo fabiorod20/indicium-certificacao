@@ -12,17 +12,18 @@ with
            pessoas.rowguid_pessoa
             , pessoas.businessentityid_pessoa
             , clientes.id_cliente
+            , clientes.personid_cliente
             , clientes.rowguid_cliente
             , pessoas.nome_pessoa as cliente
 
         from clientes
         left join pessoas on
-            clientes.id_cliente = pessoas.businessentityid_pessoa
+            clientes.personid_cliente = pessoas.businessentityid_pessoa
         
     )
     , transformacoes as (
         select
-            row_number() over (order by rowguid_pessoa) as sk_cliente
+            row_number() over (order by id_cliente) as sk_cliente
             , *
         from join_tabelas
     )
