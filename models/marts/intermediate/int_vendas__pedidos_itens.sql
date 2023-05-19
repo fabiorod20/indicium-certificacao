@@ -7,17 +7,21 @@ with
         select *
         from {{ ref('stg_sap__detalhes_ordens_de_venda') }}
     )
-    , joined_pedidos_itens as (
+    , join_tabelas as (
         select
-            pedidos.salesorderid_ordens as salesorderid_ordens
-            , pedidos.rowguid_ordens as rowguid_ordens
-            , pedidos.customerid_ordens as customerid
-            , pedidos.salespersonid_ordens as salespersonid
-            , pedidos.creditcardid_ordens as creditcardid
-            , pedidos.territoryid_ordens as territoryid
-            , pedido_itens.salesorderid_detalhesordens as salesorderid_detalhesordens
-            , pedido_itens.productid_detalhesordens as productid
-            , pedido_itens.rowguid_detalhesordens as rowguid_detalhesordens
+            pedidos.salesorderid_ordens
+            , pedidos.rowguid_ordens
+            , pedidos.customerid_ordens
+            , pedidos.billtoaddressid_ordens
+            , pedidos.shiptoaddressid_ordens
+            , pedidos.salespersonid_ordens
+            , pedidos.creditcardid_ordens
+            , pedidos.territoryid_ordens
+            , pedidos.revisionnumber
+            , pedido_itens.salesorderid_detalhesordens
+            , pedido_itens.salesorderdetailid_detalhesordens
+            , pedido_itens.productid_detalhesordens
+            , pedido_itens.rowguid_detalhesordens
             , pedidos.orderdate_ordens as data_do_pedido
             , pedidos.status_ordens as status
             , pedidos.purchaseordernumber_ordens as numero_do_pedido
@@ -32,5 +36,11 @@ with
         left join pedidos on
             pedido_itens.salesorderid_detalhesordens = pedidos.salesorderid_ordens
     )
+    , transformacoes as (
+        select
+            row_number() over (order by salesorderid_detalhesordens) as sk_teste
+            , *
+        from join_tabelas
+    )
 select *
-from joined_pedidos_itens
+from transformacoes

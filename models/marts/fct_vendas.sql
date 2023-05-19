@@ -3,7 +3,7 @@ with
         select *
         from {{ ref('dim_cartoes_de_credito') }}
     )
-    , localizacoes_total as (
+    , localizacoes as (
         select *
         from {{ ref('dim_localizacoes_total') }}
     )
@@ -17,7 +17,7 @@ with
     )
     , razoes as (
         select *
-        from {{ ref('dim_razoes_de_venda') }}
+       from {{ ref('dim_razoes_de_venda') }}
     )
     , pedido_item as (
         select *
@@ -25,21 +25,25 @@ with
     )
     , joined_tabelas as (
         select
-            pedido_item.salesorderid_ordens
-            , pedido_item.rowguid_ordens
-            , cartoes.sk_cartao as fk_cartao
-            , localizacoes_total.sk_localizacao as fk_localizacao
+            cartoes.sk_cartao as fk_cartao
+            , localizacoes.sk_localizacao as fk_localizacao
             , clientes.sk_cliente as fk_cliente
             , produtos.sk_produto as fk_produto
             , razoes.sk_razao as fk_razao
-            , pedido_item.customerid
-            , pedido_item.territoryid
-            , pedido_item.salespersonid
-            , pedido_item.creditcardid
-            , pedido_item.productid
+            , pedido_item.salesorderid_ordens as salesorderid
+            , pedido_item.customerid_ordens
+            , pedido_item.billtoaddressid_ordens
+            , pedido_item.salesorderdetailid_detalhesordens
+            , pedido_item.shiptoaddressid_ordens
+            , pedido_item.territoryid_ordens
+            , pedido_item.revisionnumber
+            , razoes.salesreasonid_chaverazaodevenda
+            , pedido_item.creditcardid_ordens
+            , pedido_item.salesorderid_detalhesordens
+            , razoes.salesorderid_chaverazaodevenda
+            , pedido_item.productid_detalhesordens
             , pedido_item.data_do_pedido
             , pedido_item.status
-            , pedido_item.numero_do_pedido
             , pedido_item.subtotal
             , pedido_item.taxas
             , pedido_item.frete
@@ -47,23 +51,23 @@ with
             , pedido_item.quantidade_de_itens
             , pedido_item.preco_por_unidade
             , pedido_item.desconto_por_unidade
-            , cartoes.card_type
-            , localizacoes_total.cidade
+            , cartoes.card_type as tipo_de_cartao
+            , localizacoes.cidade
             , clientes.cliente
-            , localizacoes_total.estado
+            , localizacoes.estado
             , produtos.produto
             , razoes.razao_de_venda
-            , localizacoes_total.pais
+            , localizacoes.pais
         from pedido_item
-        left join cartoes on pedido_item.creditcardid = cartoes.creditcardid_cartaodecredito
-        left join localizacoes_total on pedido_item.territoryid = localizacoes_total.addressid_cidade
-        left join clientes on pedido_item.customerid = clientes.id_cliente
-        left join produtos on pedido_item.productid = produtos.productid_produto
-        left join razoes on pedido_item.salesorderid_ordens = razoes.salesorderid_chaverazaodevenda
+        left join cartoes on pedido_item.creditcardid_ordens = cartoes.creditcardid_cartaodecredito
+        left join localizacoes on pedido_item.shiptoaddressid_ordens = localizacoes.addressid_cidade
+        left join clientes on pedido_item.customerid_ordens = clientes.id_cliente
+        left join razoes on pedido_item.salesorderid_detalhesordens = razoes.salesorderid_chaverazaodevenda
+        left join produtos on pedido_item.productid_detalhesordens = produtos.productid_produto
     )
     , transformacoes as (
         select
-            {{ dbt_utils.generate_surrogate_key(['productid', 'fk_produto']) }} as sk_venda
+            row_number() over (order by salesorderid_detalhesordens) as sk_venda
             , *
             , quantidade_de_itens * preco_por_unidade as total_bruto
             , (1 - desconto_por_unidade) * quantidade_de_itens * preco_por_unidade as total_liquido
