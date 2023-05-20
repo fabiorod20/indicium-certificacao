@@ -36,11 +36,5 @@ with
         left join pedidos on
             pedido_itens.salesorderid_detalhesordens = pedidos.salesorderid_ordens
     )
-    , transformacoes as (
-        select
-            row_number() over (order by salesorderid_detalhesordens) as sk_teste
-            , *
-        from join_tabelas
-    )
 select *
-from transformacoes
+from join_tabelas
